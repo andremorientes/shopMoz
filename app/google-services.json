@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "668792762704",
+    "project_id": "shopmoz-609bb",
+    "storage_bucket": "shopmoz-609bb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:668792762704:android:6851c5d90eff9c983e3c55",
+        "android_client_info": {
+          "package_name": "com.example.shopmoz"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVJwii6RzK2ZG4AOboEaZRlgIhhakHoqk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
