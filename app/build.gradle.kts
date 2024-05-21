@@ -83,4 +83,6 @@ dependencies {
 
     //FireBase
     implementation("com.google.firebase:firebase-auth:22.3.1")
+
+    implementation ("androidx.fragment:fragment-ktx:1.5.2")
 }

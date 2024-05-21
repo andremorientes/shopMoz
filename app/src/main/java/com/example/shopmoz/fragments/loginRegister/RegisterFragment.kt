@@ -53,7 +53,7 @@ class RegisterFragment: Fragment() {
                 when(it){
                     is Resource.Loading ->{
                         binding.buttonRegister.startAnimation()
-                        Log.d("de", it.message.toString())
+                        Log.i("de", it.message.toString())
 
                     }
                     is Resource.Sucess ->{
