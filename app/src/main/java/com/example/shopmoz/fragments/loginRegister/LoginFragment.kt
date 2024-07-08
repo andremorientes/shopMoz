@@ -13,8 +13,10 @@ import androidx.navigation.fragment.findNavController
 import com.example.shopmoz.R
 import com.example.shopmoz.activitys.ShoppingActivity
 import com.example.shopmoz.databinding.FragmentLoginBinding
+import com.example.shopmoz.dialog.setupBottomSheetDialog
 import com.example.shopmoz.util.Resource
 import com.example.shopmoz.viewmodel.LoginViewModel
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
@@ -46,6 +48,30 @@ class LoginFragment: Fragment(R.layout.fragment_login) {
                 val email = edEmailLogin.text.toString().trim()
                 val password= edPasswordLogin.text.toString()
                 viewModel.login(email, password)
+            }
+        }
+
+        binding.tvForgotPasswordLogin.setOnClickListener {
+            setupBottomSheetDialog { email->
+                viewModel.resetPassword(email)
+
+            }
+        }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.resetPassword.collect{
+                when(it){
+                    is Resource.Loading ->{
+
+                    }
+                    is Resource.Sucess ->{
+                        Snackbar.make(requireView(),"Email para resetar a senha enviado com Sucesso", Snackbar.LENGTH_LONG).show()
+
+                    }
+                    is Resource.Error ->{
+                        Snackbar.make(requireView(),"Error: ${ it.message} ", Snackbar.LENGTH_LONG).show()
+                    }else -> Unit
+                }
             }
         }
 

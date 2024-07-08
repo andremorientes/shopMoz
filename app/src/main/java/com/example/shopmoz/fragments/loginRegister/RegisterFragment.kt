@@ -68,6 +68,8 @@ class RegisterFragment: Fragment() {
                         Log.d("test", it.message.toString())
                         binding.buttonRegister.revertAnimation()
 
+                        findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+
                     }
                     is Resource.Error ->{
                         Log.e(TAG, it.message.toString())
