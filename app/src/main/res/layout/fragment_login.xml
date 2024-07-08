@@ -137,7 +137,7 @@
 
             />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
             android:id="@+id/buttonLogin"
             android:layout_width="@dimen/mediumButtomWith"
             android:layout_height="@dimen/mediumButtomHeight"
@@ -146,7 +146,8 @@
             app:layout_constraintTop_toBottomOf="@id/tvForgotPasswordLogin"
             app:layout_constraintStart_toStartOf="@id/guidelineLoginLeft"
             app:layout_constraintEnd_toEndOf="@id/guidelineLoginRight"
-            android:text="Entrar"/>
+            android:text="Entrar"
+            app:spinning_bar_color="@color/white"/>
 
 
 

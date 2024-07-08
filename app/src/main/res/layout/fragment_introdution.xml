@@ -65,6 +65,7 @@
     
     
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonStar"
         android:layout_width="@dimen/smallButtomWith"
         android:layout_height="@dimen/smallButtomHeight"
         style="@style/blueButtonStyle"
