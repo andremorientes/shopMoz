@@ -17,7 +17,7 @@ class HomeViewPagerAdapter(
 
     override fun createFragment(position: Int): Fragment {
 
-        return fragments
+        return fragments[position]
     }
 
 }
