@@ -18,7 +18,7 @@ class ShoppingActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val navController = findNavController(R.id.shoppingHostFragment)
-        binding.bottomNavigation.setupWithNavController(navController)
+        //binding.bottomNavigation.setupWithNavController(navController)
 
     }
 }
