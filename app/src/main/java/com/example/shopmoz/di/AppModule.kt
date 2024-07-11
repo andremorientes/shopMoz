@@ -1,6 +1,8 @@
 package com.example.shopmoz.di
 
+import android.app.Application
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -18,9 +20,8 @@ object AppModule {
     @Singleton
     fun provideFirebaseAuth()= FirebaseAuth.getInstance()
 
-
     @Provides
     @Singleton
-
     fun provideFirebaseFirestoreDatabase()= Firebase.firestore
+
 }

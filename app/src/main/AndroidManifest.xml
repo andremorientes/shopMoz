@@ -17,6 +17,9 @@
             android:name=".activitys.LoginRegisterActivity"
             android:exported="false" />
         <activity
+            android:name="com.example.productsadder.AdminActivity"
+            android:exported="false" />
+        <activity
             android:name=".activitys.ShoppingActivity"
             android:exported="true">
             <intent-filter>

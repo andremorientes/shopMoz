@@ -96,4 +96,9 @@ dependencies {
     implementation ("com.google.android.material:material:1.3.0")
     implementation ("androidx.navigation:navigation-fragment-ktx:2.3.2")
     implementation ("androidx.navigation:navigation-ui-ktx:2.3.2")
+
+
+
+    //Color picker
+    implementation ("com.github.skydoves:colorpickerview:2.2.4")
 }

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.shopmoz.R
+import com.example.shopmoz.adapters.HomeViewPagerAdapter
 import com.example.shopmoz.databinding.FragmentHomeBinding
 import com.example.shopmoz.fragments.categories.AccessoryFragment
 import com.example.shopmoz.fragments.categories.ChairFragment
@@ -13,6 +14,7 @@ import com.example.shopmoz.fragments.categories.CupBoardFragment
 import com.example.shopmoz.fragments.categories.FurnitureFragment
 import com.example.shopmoz.fragments.categories.MainCategoryFragment
 import com.example.shopmoz.fragments.categories.TableFragment
+import com.google.android.material.tabs.TabLayoutMediator
 
 class HomeFragment: Fragment(R.layout.fragment_home) {
 
@@ -38,5 +40,20 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
             AccessoryFragment(),
             FurnitureFragment()
         )
+
+        val viewPage2Adapter= HomeViewPagerAdapter(categoriesFragments, childFragmentManager, lifecycle)
+        binding.viewPagerHome.adapter= viewPage2Adapter
+        TabLayoutMediator(binding.tableLayout, binding.viewPagerHome){tab,position ->
+
+            //CONFIGURAÇÃO FEITA PARA EXIBIR AS CATEGORIAS NA TABLAYOUT
+            when(position){
+                0-> tab.text= "Main"
+                1-> tab.text="Chair"
+                2-> tab.text="CupBoard"
+                3-> tab.text="Accessory"
+                4-> tab.text="Furtunire"
+            }
+
+        }.attach()
     }
 }
