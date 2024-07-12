@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.shopmoz.data.Product
 import com.example.shopmoz.databinding.SpecialRvItemBinding
+import java.text.NumberFormat
+import java.util.Locale
 
 class SpecialProductsAdapter: RecyclerView.Adapter<SpecialProductsAdapter.SpecialProductsViewHolder>() {
 
@@ -16,7 +18,9 @@ class SpecialProductsAdapter: RecyclerView.Adapter<SpecialProductsAdapter.Specia
             binding.apply {
                 Glide.with(itemView).load(product.images[0]).into(imageSpecialRvItem)
                 tvSpecialProductName.text=product.name
-                tvSpecialProdutPrice.text=product.price.toString()
+                val formattedPrice = NumberFormat.getNumberInstance(Locale("pt", "BR")).format(product.price)
+                tvSpecialProdutPrice.text= "MZ ${formattedPrice}"
+
 
             }
         }
