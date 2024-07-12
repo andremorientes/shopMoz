@@ -58,6 +58,7 @@ class MainCategoryFragment: Fragment(R.layout.fragment_main_category) {
 
                 }
             }
+            viewModel
         }
     }
 

@@ -23,6 +23,7 @@ import com.skydoves.colorpickerview.ColorEnvelope
 import com.skydoves.colorpickerview.ColorPickerDialog
 import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
@@ -148,36 +149,41 @@ class AdminActivity : AppCompatActivity() {
                 withContext(Dispatchers.Main) {
                     showLoading()
                 }
-
-                imagesByteArrays.forEach { byteArray ->
-                    val id = UUID.randomUUID().toString()
-                    launch {
-                        val imageStorage = productsStorage.child("products/images/$id")
-                        val result = imageStorage.putBytes(byteArray).await()
-                        val downloadUrl = result.storage.downloadUrl.await().toString()
-                        images.add(downloadUrl)
+                async {
+                    imagesByteArrays.forEach { byteArray ->
+                        val id = UUID.randomUUID().toString()
+                        launch {
+                            val imageStorage = productsStorage.child("products/images/$id")
+                            val result = imageStorage.putBytes(byteArray).await()
+                            val downloadUrl = result.storage.downloadUrl.await().toString()
+                            images.add(downloadUrl)
+                        }
                     }
-                }
 
-                val product = Product(
-                    UUID.randomUUID().toString(),
-                    name,
-                    category,
-                    price.toFloat(),
-                    if (offerPercentage.isEmpty()) null else offerPercentage.toFloat(),
-                    if (description.isEmpty()) null else description,
-                    if (selectedImages.isEmpty()) null else selectedColors,
-                    sizes,
-                    images
-                )
 
-                firestore.collection("Products").add(product).addOnSuccessListener {
-                    hideLoading()
-                }.addOnFailureListener { e ->
-                    hideLoading()
-                    Log.e("Error", e.message.toString())
-                }
+                }.await()
+
+
             } catch (e: Exception) {
+                hideLoading()
+                Log.e("Error", e.message.toString())
+            }
+
+            val product = Product(
+                UUID.randomUUID().toString(),
+                name,
+                category,
+                price.toFloat(),
+                if (offerPercentage.isEmpty()) null else offerPercentage.toFloat(),
+                if (description.isEmpty()) null else description,
+                if (selectedColors.isEmpty()) null else selectedColors,
+                sizes,
+                images
+            )
+
+            firestore.collection("Products").add(product).addOnSuccessListener {
+                hideLoading()
+            }.addOnFailureListener { e ->
                 hideLoading()
                 Log.e("Error", e.message.toString())
             }
