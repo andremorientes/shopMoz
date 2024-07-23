@@ -24,6 +24,9 @@ class MainCategoryViewModel  @Inject constructor(
 
     private val _bestProducts= MutableStateFlow<Resource<List<Product>>>(Resource.Unspecified())
     val bestProducts : StateFlow<Resource<List<Product>>> = _bestProducts
+
+
+
     init {
       fetchSpecialProduct()
         fetchBestDealsProducts()

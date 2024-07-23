@@ -62,8 +62,9 @@
             app:layout_constraintStart_toStartOf="@id/guidelineLoginLeft"
             app:layout_constraintEnd_toEndOf="@id/guidelineLoginRight"
             app:layout_constraintTop_toBottomOf="@id/tvDontHaveAccount"
-            style="@style/editText"
+            style="@style/editTex"
             android:hint="Email"
+          android:paddingStart="10dp"
             android:inputType="textEmailAddress"
             android:layout_marginTop="50dp"/>
 
@@ -74,8 +75,9 @@
             app:layout_constraintStart_toStartOf="@id/guidelineLoginLeft"
             app:layout_constraintEnd_toEndOf="@id/guidelineLoginRight"
             app:layout_constraintTop_toBottomOf="@id/edEmailLogin"
-            style="@style/editText"
+            style="@style/editTex"
             android:hint="Senha"
+            android:paddingStart="10dp"
             android:inputType="textPassword"
             android:layout_marginTop="20dp"/>
 

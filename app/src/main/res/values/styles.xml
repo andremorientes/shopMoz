@@ -43,6 +43,14 @@
         <item name="android:fontFamily">@font/poppins_light</item>
     </style>
 
+    <style name="editTex">
+        <item name="android:background">@drawable/edit_background</item>
+        <item name="paddingStart">10dp</item>
+        <item name="singleLine">true</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/poppins_light</item>
+    </style>
+
     <style name="editTextProduct">
         <item name="android:background">@drawable/white_background</item>
         <item name="android:fontFamily">@font/poppins_light</item>
