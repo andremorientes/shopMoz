@@ -32,13 +32,16 @@ class ChairFragment: BaseCategoryFragment() {
                 when(it){
                     is Resource.Loading ->{
 
+                        showOfferLoading()
                     }
                     is Resource.Sucess ->{
+                        hideOfferLoading()
                         offerAdapter.differ.submitList(it.data)
                     }
                     is Resource.Error ->{
                         Snackbar.make(requireView(),it.message.toString(), Snackbar.LENGTH_LONG)
                             .show()
+                        hideBestProductsLoading()
                     }
                     else -> Unit
                 }
@@ -50,14 +53,16 @@ class ChairFragment: BaseCategoryFragment() {
             viewModel.bestProducts.collectLatest {
                 when(it){
                     is Resource.Loading ->{
-
+                        showBestProductsLoading()
                     }
                     is Resource.Sucess ->{
-                        offerAdapter.differ.submitList(it.data)
+                        bestProductsAdapter.differ.submitList(it.data)
+                        hideBestProductsLoading()
                     }
                     is Resource.Error ->{
                         Snackbar.make(requireView(),it.message.toString(), Snackbar.LENGTH_LONG)
                             .show()
+                        hideBestProductsLoading()
                     }
                     else -> Unit
                 }

@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.shopmoz.R
@@ -47,6 +49,20 @@ class MainCategoryFragment: Fragment(R.layout.fragment_main_category) {
         setupBestDealsRv()
 
         setupBestProductsRv()
+
+        specialProductsAdapter.onClick ={
+            val b= Bundle().apply { putParcelable("product", it) }
+            findNavController().navigate(R.id.action_homeFragment_to_productDetailsFragment,b)
+        }
+        bestDealsAdapter.onClick ={
+            val b= Bundle().apply { putParcelable("product", it) }
+            findNavController().navigate(R.id.action_homeFragment_to_productDetailsFragment,b)
+        }
+        bestProductsAdapter.onClick ={
+            val b= Bundle().apply { putParcelable("product", it) }
+            findNavController().navigate(R.id.action_homeFragment_to_productDetailsFragment,b)
+        }
+
 
         lifecycleScope.launchWhenStarted {
             viewModel.specialProducts.collectLatest {
@@ -95,14 +111,15 @@ class MainCategoryFragment: Fragment(R.layout.fragment_main_category) {
             viewModel.bestProducts.collectLatest {
                 when(it){
                     is Resource.Loading->{
-                        showLoading()
+                        binding.bestProductProgressBar.visibility= View.VISIBLE
                     }
                     is Resource.Sucess->{
                         bestProductsAdapter.differ.submitList(it.data)
-                        hideLoading()
+                        binding.bestProductProgressBar.visibility= View.GONE
+
                     }
                     is Resource.Error->{
-                        hideLoading()
+                        binding.bestProductProgressBar.visibility= View.GONE
                         Log.e(TAG,it.message.toString())
                         Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
                     }
@@ -113,7 +130,16 @@ class MainCategoryFragment: Fragment(R.layout.fragment_main_category) {
 
         }
 
+        binding.nestedScrollMainCategory.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener{v,_,scrolly,_,_->
+
+            if (v.getChildAt(0).bottom<= v.height * scrolly){
+                viewModel.fetchBestProducts()
+            }
+        })
+
     }
+
+
 
     private fun setupBestProductsRv() {
         bestProductsAdapter= BestProductsAdapter()

@@ -183,6 +183,7 @@ class AdminActivity : AppCompatActivity() {
 
             firestore.collection("Products").add(product).addOnSuccessListener {
                 hideLoading()
+                resetFields()
             }.addOnFailureListener { e ->
                 hideLoading()
                 Log.e("Error", e.message.toString())
@@ -225,5 +226,18 @@ class AdminActivity : AppCompatActivity() {
         if (binding.edCategory.text.toString().trim().isEmpty()) return false
         if (selectedImages.isEmpty()) return false
         return true
+    }
+
+    private fun resetFields() {
+        binding.edName.text.clear()
+        binding.edCategory.text.clear()
+        binding.edPrice.text.clear()
+        binding.offerPercentage.text.clear()
+        binding.edDescription.text.clear()
+        binding.edSizes.text.clear()
+        binding.tvSelectedImages.text = "0"
+        binding.tvSelectedColors.text = ""
+        selectedImages.clear()
+        selectedColors.clear()
     }
 }

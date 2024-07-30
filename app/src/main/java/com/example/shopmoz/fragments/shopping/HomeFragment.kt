@@ -50,9 +50,10 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
             when(position){
                 0-> tab.text= "Main"
                 1-> tab.text="Chair"
-                2-> tab.text="CupBoard"
-                3-> tab.text="Accessory"
-                4-> tab.text="Furtunire"
+                2-> tab.text="Table"
+                3-> tab.text="CupBoard"
+                4-> tab.text="Accessory"
+                5-> tab.text="Furtunire"
             }
 
         }.attach()

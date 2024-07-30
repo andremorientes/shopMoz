@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.shopmoz.data.Product
 import com.example.shopmoz.util.Resource
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -26,6 +27,7 @@ class MainCategoryViewModel  @Inject constructor(
     val bestProducts : StateFlow<Resource<List<Product>>> = _bestProducts
 
 
+    private val pagingInfo= PagingInfo()
 
     init {
       fetchSpecialProduct()
@@ -79,18 +81,23 @@ class MainCategoryViewModel  @Inject constructor(
     }
 
     fun fetchBestProducts(){
+
+        if (!pagingInfo.isPagingEnd){
+
         viewModelScope.launch {
             _bestProducts
                 .emit(Resource.Loading())
-        }
 
         //Buscando a Categoria Best Deals no Firestore
-        firestore.collection("Products").get().
+        firestore.collection("Products").limit(pagingInfo.bestProductspage *10).get().
             addOnSuccessListener { result->
                 val bestProdutList= result.toObjects(Product::class.java)
+                pagingInfo.isPagingEnd= bestProdutList == pagingInfo.oldBestProducts
+                pagingInfo.oldBestProducts= bestProdutList
                 viewModelScope.launch {
                     _bestProducts.emit(Resource.Sucess(bestProdutList))
                 }
+                pagingInfo.bestProductspage++
 
             }.addOnFailureListener {
                 viewModelScope.launch {
@@ -98,5 +105,15 @@ class MainCategoryViewModel  @Inject constructor(
                 }
 
             }
+        }
     }
+
+  }
 }
+
+internal data class PagingInfo(
+     var bestProductspage : Long= 1,
+    var oldBestProducts: List<Product> = emptyList(),
+    var isPagingEnd: Boolean= false
+
+)
