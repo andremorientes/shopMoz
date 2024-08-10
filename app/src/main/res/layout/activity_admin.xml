@@ -156,16 +156,26 @@
                     android:layout_marginStart="20dp"/>
             </LinearLayout>
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_marginTop="20dp"
+        android:layout_weight="1"
+        android:layout_marginStart="10dp"
+        android:id="@+id/buttonSaveProduct"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Salvar"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        style="@style/blueButtonStyle"/>
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_marginTop="20dp"
-                android:id="@+id/buttonSaveProduct"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Salvar"
-                android:textColor="@color/white"
-                android:textAllCaps="false"
-                style="@style/blueButtonStyle"/>
+
+
+</LinearLayout>
+
 
 
         </LinearLayout>

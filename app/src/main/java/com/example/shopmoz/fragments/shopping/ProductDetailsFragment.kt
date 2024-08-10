@@ -1,16 +1,22 @@
 package com.example.shopmoz.fragments.shopping
 
+import android.os.Binder
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.shopmoz.R
+import com.example.shopmoz.activitys.ShoppingActivity
 import com.example.shopmoz.adapters.ColorsAdapter
 import com.example.shopmoz.adapters.SizeAdapter
 import com.example.shopmoz.adapters.ViewPager2Images
 import com.example.shopmoz.databinding.FragmentProductsDetailsBinding
+import com.example.shopmoz.util.hideBottomNavigation
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class ProductDetailsFragment: Fragment() {
     private  val args by navArgs <ProductDetailsFragmentArgs>()
@@ -24,6 +30,8 @@ class ProductDetailsFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        hideBottomNavigation()
+
         binding= FragmentProductsDetailsBinding.inflate(inflater)
         return binding.root
     }
@@ -37,10 +45,16 @@ class ProductDetailsFragment: Fragment() {
         setupColorRv()
         setupViewPager()
 
+        binding.imageClose.setOnClickListener {
+            findNavController().navigateUp()
+        }
         binding.apply {
             tvProductName.text= product.name
             tvProductPrice.text="MZN ${product.price}"
             tvProducDescription.text= product.description
+
+
+
         }
 
         viewPagerAdapter.differ.submitList(product.images)

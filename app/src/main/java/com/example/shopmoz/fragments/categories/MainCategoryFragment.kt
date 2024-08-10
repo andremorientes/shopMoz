@@ -19,6 +19,7 @@ import com.example.shopmoz.adapters.BestProductsAdapter
 import com.example.shopmoz.adapters.SpecialProductsAdapter
 import com.example.shopmoz.databinding.FragmentMainCategoryBinding
 import com.example.shopmoz.util.Resource
+import com.example.shopmoz.util.showBottomNavigation
 import com.example.shopmoz.viewmodel.MainCategoryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -173,5 +174,11 @@ class MainCategoryFragment: Fragment(R.layout.fragment_main_category) {
             adapter= specialProductsAdapter
 
         }
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        showBottomNavigation()
     }
 }
