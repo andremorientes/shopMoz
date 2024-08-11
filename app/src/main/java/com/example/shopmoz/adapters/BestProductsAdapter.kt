@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.shopmoz.data.Product
 import com.example.shopmoz.databinding.ProductRvItemBinding
+import com.example.shopmoz.helper.getProductPrice
 import java.text.NumberFormat
 import java.util.Locale
 
@@ -20,13 +21,12 @@ class BestProductsAdapter: RecyclerView.Adapter<BestProductsAdapter.BestProducts
             binding.apply {
                 Glide.with(itemView).load(product.images[0]).into(imgProduct)
                 //Verificar se tem percentagem do valor
-                product.offerPercentage?.let {
-                    val remainingPricePercentage= 1f -it
-                    val priceAfterOffer= remainingPricePercentage * product.price
-                    val formattedPrice = NumberFormat.getNumberInstance(Locale("pt", "BR")).format(priceAfterOffer)
-                    tvNewPrice.text = "MZ $formattedPrice"
+
+                    val priceAfterOffer= product.offerPercentage.getProductPrice(product.price)
+
+                    tvNewPrice.text = "MZn ${String.format("%.2f", priceAfterOffer) }"
                     tvPrice.paintFlags= Paint.STRIKE_THRU_TEXT_FLAG
-                }
+
                 if (product.offerPercentage== null){
                     tvNewPrice.visibility= View.GONE
                 }
