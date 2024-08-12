@@ -22,10 +22,13 @@ class BestProductsAdapter: RecyclerView.Adapter<BestProductsAdapter.BestProducts
                 Glide.with(itemView).load(product.images[0]).into(imgProduct)
                 //Verificar se tem percentagem do valor
 
+                if(product.offerPercentage != null){
                     val priceAfterOffer= product.offerPercentage.getProductPrice(product.price)
 
                     tvNewPrice.text = "MZn ${String.format("%.2f", priceAfterOffer) }"
                     tvPrice.paintFlags= Paint.STRIKE_THRU_TEXT_FLAG
+
+                }
 
                 if (product.offerPercentage== null){
                     tvNewPrice.visibility= View.GONE

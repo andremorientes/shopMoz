@@ -17,10 +17,10 @@
             android:name="com.example.productsadder.AdminActivity"
             android:exported="false" />
         <activity
-            android:name=".activitys.LoginRegisterActivity"
+            android:name=".activitys.ShoppingActivity"
             android:exported="false" />
         <activity
-            android:name=".activitys.ShoppingActivity"
+            android:name=".activitys.LoginRegisterActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
