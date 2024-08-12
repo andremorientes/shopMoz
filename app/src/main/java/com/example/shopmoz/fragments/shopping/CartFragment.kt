@@ -62,6 +62,10 @@ class CartFragment: Fragment(R.layout.fragment_cart) {
             viewModel.changeQuantity(it, FirebaseCommon.QuantityChanging.DESCREASE)
         }
 
+
+        binding.buttonCheckOut.setOnClickListener {
+            findNavController().navigate(R.id.action_cartFragment_to_billingFragment)
+        }
         lifecycleScope.launchWhenStarted {
             viewModel.deleteDialog.collectLatest {
                 val alertDialog= AlertDialog.Builder(requireContext()).apply {
